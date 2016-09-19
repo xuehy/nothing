@@ -102,5 +102,6 @@ void MainWindow::silenceSlot()
     {
         this -> hide();
         mSysTrayIcon -> show();
+       ui->textBrowser->setText(QString(str2qstr(string("饿啦？"))));
     }
 }
