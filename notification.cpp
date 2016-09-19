@@ -20,7 +20,7 @@ void Notification::run()
         int minute = current_time.minute();
         if(hour == 17 && minute >=0 && minute < 1 && !emitted)
         {
-            str = QString(str2qstr(string("快去吃晚饭吧！吃完了才能更聪明！")));
+            str = QString(str2qstr(string("快去吃晚饭吧！")));
             emitted = true;
             emit UpdateSignal(str);
         }
@@ -31,7 +31,7 @@ void Notification::run()
         }
         else if(hour == 11 && minute >= 30 && minute < 31 && !emitted)
         {
-            str = QString(str2qstr(string("快去吃午饭吧！吃完了才能更聪明！")));
+            str = QString(str2qstr(string("该吃午饭啦！")));
             emitted = true;
             emit UpdateSignal(str);
         }

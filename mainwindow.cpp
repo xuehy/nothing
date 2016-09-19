@@ -6,7 +6,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     notify(new Notification)
 {
-    //ui->statusBar->hide();
+    textBrowser = new QLabel(this);
+    textBrowser->setGeometry(660,410,200,200);
+    textBrowser->setText(QObject::trUtf8("默默等待提醒你吃饭哦~"));
+
+    pushButton = new QPushButton(this);
+    pushButton->setGeometry(800,700,120,100);
+    pushButton->setMask((new QPixmap(":/craw1.png"))->mask());
+
     // buttons
     //获取最小化、关闭按钮图标
      closeButton = new QToolButton(this);
@@ -14,16 +21,16 @@ MainWindow::MainWindow(QWidget *parent) :
      //设置最小化、关闭按钮图标
      closeButton->setIcon(closePix);
      //设置最小化、关闭按钮在界面的位置
-     closeButton->setGeometry(620,180,30,30);
+     closeButton->setGeometry(900,350,30,30);
      closeButton->setStyleSheet("background-color:transparent;");
      closeButton->setToolTip(tr("关闭"));
      connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
 
      // 设置窗口形状和图案
-    setFixedSize(900,600);
-    setMask((new QPixmap(":/papamao.png"))->mask());
+    setFixedSize(1000,957);
+    setMask((new QPixmap(":/m.png"))->mask());
     QPalette* palette = new QPalette();
-    palette->setBrush(QPalette::Background,QBrush(QPixmap(":/papamao.png")));
+    palette->setBrush(QPalette::Background,QBrush(QPixmap(":/m.png")));
     setPalette(*palette);
 
     setWindowFlags(Qt::FramelessWindowHint| Qt::Dialog );
@@ -41,23 +48,59 @@ MainWindow::MainWindow(QWidget *parent) :
     mSysTrayIcon->setIcon(icon);
     mSysTrayIcon->setToolTip(QObject::trUtf8("默默等待提醒你吃饭哦~"));
     connect(mSysTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(activatedSysTrayIcon(QSystemTrayIcon::ActivationReason)));
-
+    connect(pushButton, SIGNAL(clicked(bool)), this, SLOT(on_pushButton_clicked()));
     connect(notify, SIGNAL(silenceSignal()), this, SLOT(silenceSlot()));
     //ui->pushButton->setMask((new QPixmap("craw1.png"))->mask());
     //ui->setupUi(this);
 
 }
+//重载基类的鼠标按下事件处理函数
+void MainWindow:: mousePressEvent(QMouseEvent *event)
+{
+    //只能是鼠标左键移动
+    if(event->button() == Qt::LeftButton)
+    {
+        mouse_press = true;
+    }
+    /*
+     * 窗口移动距离
+     * globalPose(), 以桌面左上角为原点，绝对坐标
+     * pos(), 窗体左上角（不含边框）的坐标，只要鼠标在窗体内，且窗体不动，坐标不变
+     */
+    move_point = event->globalPos() - pos();
+}
+//重载基类的鼠标释放事件处理函数
+void MainWindow:: mouseReleaseEvent(QMouseEvent *event)
+{
+    mouse_press = false;
+}
 
+//重载基类的鼠标移动事件处理函数
+void MainWindow:: mouseMoveEvent(QMouseEvent *event)
+{
+    //移动窗口
+    if(mouse_press)
+    {
+        /*
+         *  event->globalPos() - move_point
+         * =event->globalPos() - (event->globalPos0() - pos0())
+         * =pos() + (event->globalPos() - event->globalPos0())
+         */
+         move(event->globalPos() - move_point);
+    }
+}
 MainWindow::~MainWindow()
 {
     delete ui;
     delete notify;
     delete mSysTrayIcon;
+    delete textBrowser;
+    delete closeButton;
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    ui->textBrowser->clear();
+    textBrowser->clear();
     //隐藏程序主窗口
     this->hide();
     //在系统托盘显示此对象
@@ -92,16 +135,16 @@ void MainWindow::showString(QString str)
         this -> show();
         mSysTrayIcon->hide();
     }
-    ui->textBrowser->setText(str);
+    textBrowser->setText(str);
 }
 
 void MainWindow::silenceSlot()
 {
-    ui->textBrowser->setText(QString(str2qstr(string("等待提醒吃饭"))));
+    textBrowser->setText(QString(str2qstr(string("等待提醒吃饭"))));
     if(this->isVisible())
     {
         this -> hide();
         mSysTrayIcon -> show();
-       ui->textBrowser->setText(QString(str2qstr(string("饿啦？"))));
+       textBrowser->setText(QString(str2qstr(string("饿啦？"))));
     }
 }

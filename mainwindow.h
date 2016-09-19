@@ -10,6 +10,9 @@
 #include <qbitmap.h>
 #include <qgridlayout.h>
 #include <qtoolbutton.h>
+#include <qlabel.h>
+#include <qpushbutton.h>
+#include <QMouseEvent>
 namespace Ui {
 class MainWindow;
 }
@@ -31,9 +34,22 @@ private:
     Notification *notify;
     QSystemTrayIcon *mSysTrayIcon;
     QToolButton *closeButton;
+    QLabel *textBrowser;
+    QPushButton *pushButton;
+
+    QPoint move_point;   //鼠标按下位置
+    bool mouse_press;    //鼠标是否按下的标识
 public slots:
     void showString(QString str);
     void silenceSlot();
+protected:
+    //重载基类的鼠标按下事件处理函数
+       virtual void mousePressEvent(QMouseEvent *event);
+       //重载基类的鼠标释放事件处理函数
+       virtual void mouseReleaseEvent(QMouseEvent *event);
+       //重载基类的鼠标移动事件处理函数
+       virtual void mouseMoveEvent(QMouseEvent *event);
+
 };
 QString str2qstr(const string str);
 #endif // MAINWINDOW_H

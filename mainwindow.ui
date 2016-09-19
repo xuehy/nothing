@@ -19,37 +19,7 @@
   <property name="windowTitle">
    <string>乖～去吃饭～</string>
   </property>
-  <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>430</y>
-      <width>108</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>走开走开~</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="textBrowser">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>160</y>
-      <width>551</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>18</pointsize>
-     </font>
-    </property>
-   </widget>
-  </widget>
+  <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
