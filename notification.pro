@@ -13,8 +13,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    notification.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    notification.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES +=
+
+RESOURCES += \
+    image.qrc
