@@ -9,6 +9,7 @@
 #include <qpixmap.h>
 #include <qbitmap.h>
 #include <qgridlayout.h>
+#include <qtoolbutton.h>
 namespace Ui {
 class MainWindow;
 }
@@ -29,6 +30,7 @@ private:
     Ui::MainWindow *ui;
     Notification *notify;
     QSystemTrayIcon *mSysTrayIcon;
+    QToolButton *closeButton;
 public slots:
     void showString(QString str);
     void silenceSlot();

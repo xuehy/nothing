@@ -6,12 +6,27 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     notify(new Notification)
 {
-    setFixedSize(600,600);
-    //setMask((new QPixmap("cat.png"))->mask());
+    //ui->statusBar->hide();
+    // buttons
+    //获取最小化、关闭按钮图标
+     closeButton = new QToolButton(this);
+     QPixmap closePix = style()->standardPixmap(QStyle::SP_TitleBarCloseButton);
+     //设置最小化、关闭按钮图标
+     closeButton->setIcon(closePix);
+     //设置最小化、关闭按钮在界面的位置
+     closeButton->setGeometry(620,180,30,30);
+     closeButton->setStyleSheet("background-color:transparent;");
+     closeButton->setToolTip(tr("关闭"));
+     connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
+
+     // 设置窗口形状和图案
+    setFixedSize(900,600);
+    setMask((new QPixmap(":/papamao.png"))->mask());
     QPalette* palette = new QPalette();
-        palette->setBrush(QPalette::Background,QBrush(QPixmap(":/cat.jpg")));
-        setPalette(*palette);
-        //setWindowFlags(Qt::FramelessWindowHint);
+    palette->setBrush(QPalette::Background,QBrush(QPixmap(":/papamao.png")));
+    setPalette(*palette);
+
+    setWindowFlags(Qt::FramelessWindowHint| Qt::Dialog );
     QWidget *centralWidget = new QWidget(this);
     QGridLayout *layout = new QGridLayout();
 
@@ -28,8 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(mSysTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(activatedSysTrayIcon(QSystemTrayIcon::ActivationReason)));
 
     connect(notify, SIGNAL(silenceSignal()), this, SLOT(silenceSlot()));
-    //ui->pushButton->setMask((new QPixmap("craw.png"))->mask());
-    ui->setupUi(this);
+    //ui->pushButton->setMask((new QPixmap("craw1.png"))->mask());
+    //ui->setupUi(this);
 
 }
 
