@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setFixedSize(600,600);
     //setMask((new QPixmap("cat.png"))->mask());
     QPalette* palette = new QPalette();
-        palette->setBrush(QPalette::Background,QBrush(QPixmap("cat.jpg")));
+        palette->setBrush(QPalette::Background,QBrush(QPixmap(":/cat.jpg")));
         setPalette(*palette);
         //setWindowFlags(Qt::FramelessWindowHint);
     QWidget *centralWidget = new QWidget(this);
@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     notify -> start();
 
     mSysTrayIcon = new QSystemTrayIcon(this);
-    QIcon icon = QIcon("image/cup.png");
+    QIcon icon = QIcon(":/cup.png");
     mSysTrayIcon->setIcon(icon);
     mSysTrayIcon->setToolTip(QObject::trUtf8("默默等待提醒你吃饭哦~"));
     connect(mSysTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(activatedSysTrayIcon(QSystemTrayIcon::ActivationReason)));

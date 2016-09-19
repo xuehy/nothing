@@ -3,6 +3,5 @@
         <file>cup.jpg</file>
         <file>cup.png</file>
         <file>cat.jpg</file>
-        <file>../build-notification-unknown-Release/cup.xpm</file>
     </qresource>
 </RCC>
