@@ -6,10 +6,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     notify(new Notification)
 {
+    QFontDatabase::addApplicationFont(":/f.ttf");
     textBrowser = new QLabel(this);
     textBrowser->setGeometry(660,410,200,200);
+    textBrowser->setWordWrap(true);
+    textBrowser->setAlignment(Qt::AlignTop);
     textBrowser->setText(QObject::trUtf8("默默等待提醒你吃饭哦~"));
-
+    textBrowser->setFont(QFont("f", 20));
     pushButton = new QPushButton(this);
     pushButton->setGeometry(800,700,120,100);
     pushButton->setMask((new QPixmap(":/craw1.png"))->mask());

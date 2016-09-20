@@ -13,6 +13,7 @@
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <QMouseEvent>
+#include <QFontDatabase>
 namespace Ui {
 class MainWindow;
 }
