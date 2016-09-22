@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     QFontDatabase::addApplicationFont(":/f.ttf");
     textBrowser = new QLabel(this);
-    textBrowser->setGeometry(660,410,200,200);
+    textBrowser->setGeometry(610,460,200,200);
     textBrowser->setWordWrap(true);
     textBrowser->setAlignment(Qt::AlignTop);
     textBrowser->setText(QObject::trUtf8("默默等待提醒你吃饭哦~"));
@@ -24,16 +24,16 @@ MainWindow::MainWindow(QWidget *parent) :
      //设置最小化、关闭按钮图标
      closeButton->setIcon(closePix);
      //设置最小化、关闭按钮在界面的位置
-     closeButton->setGeometry(900,350,30,30);
+     closeButton->setGeometry(900,400,30,30);
      closeButton->setStyleSheet("background-color:transparent;");
      closeButton->setToolTip(tr("关闭"));
      connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
 
      // 设置窗口形状和图案
-    setFixedSize(1000,957);
-    setMask((new QPixmap(":/m.png"))->mask());
+    setFixedSize(1000,1063);
+    setMask((new QPixmap(":/7.png"))->mask());
     QPalette* palette = new QPalette();
-    palette->setBrush(QPalette::Background,QBrush(QPixmap(":/m.png")));
+    palette->setBrush(QPalette::Background,QBrush(QPixmap(":/7.png")));
     setPalette(*palette);
 
     setWindowFlags(Qt::FramelessWindowHint| Qt::Dialog );
